@@ -29,7 +29,6 @@ public class Challenge01 {
 					output[i] = Domains[j][1];
 					break;
 				}
-
 			}
 		}
 		return output;
