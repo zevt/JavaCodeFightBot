@@ -47,8 +47,6 @@ public class Typosquatting {
 					if (a != dot && b != dot && a != b) {
 						String newDomain = e.substring(0, index) + b + a + e.substring(index + 2, e.length());
 						if (domainTree.add(newDomain)) {
-							// System.out.println(domainTree.size() + ": " +
-							// newDomain);
 							tempDomainList.add(newDomain);
 						}
 					}
@@ -61,7 +59,6 @@ public class Typosquatting {
 
 			lastLevelDomainList = tempDomainList;
 			++level;
-//			System.out.println(" Level = " + level);
 			if (currentSize == domainTree.size()) {
 				break;
 			}
