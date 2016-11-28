@@ -94,7 +94,6 @@ public class DomainForwarding {
 			}
 			System.out.println();
 		}
-
 	}
 
 	static String[][] domainForwarding(String[][] redirects) {

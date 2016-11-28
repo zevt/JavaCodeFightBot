@@ -25,7 +25,6 @@ public class Typosquatting {
 
 	static int typosquatting(int n, String domain) {
 		
-		
 		final char dot = '.';
 		TreeSet<String> domainTree = new TreeSet();
 		LinkedList<String> lastLevelDomainList = new LinkedList();
