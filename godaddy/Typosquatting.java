@@ -34,7 +34,6 @@ public class Typosquatting {
 		lastLevelDomainList.add(domain);
 		int currentSize = 0;
 		while (domainTree.size() <= n + 1) {
-
 			currentSize = domainTree.size();
 			Iterator<String> iterDomain = lastLevelDomainList.iterator();
 			LinkedList<String> tempDomainList = new LinkedList();
@@ -50,7 +49,6 @@ public class Typosquatting {
 						}
 					}
 					if (domainTree.size() > n + 1) {
-
 						break;
 					}
 				}

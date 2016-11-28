@@ -102,9 +102,7 @@ public class DomainForwarding {
 		listOfReMap.add(new RedirectMap().addNewDomainDesSet(redirects[0][0], redirects[0][1]));
 
 		for (int i = 1; i < redirects.length; ++i) {
-
 			boolean newDomainMap = true;
-
 			for (int j = 0; j < listOfReMap.size(); ++j) {
 				RedirectMap tempRM = listOfReMap.get(j);
 				if (tempRM.accept(redirects[i][0], redirects[i][1])) {
@@ -112,7 +110,6 @@ public class DomainForwarding {
 					break;
 				}
 			}
-
 			if (newDomainMap) {
 				listOfReMap.add(new RedirectMap().addNewDomainDesSet(redirects[i][0], redirects[i][1]));
 			}
@@ -129,7 +126,6 @@ public class DomainForwarding {
 		int index = 0;
 
 		for (RedirectMap rediMap : listOfReMap) {
-
 			output[index] = new String[rediMap.domainsTree.size()];
 			int indexJ = 0;
 			for (String s : rediMap.domainsTree) {
