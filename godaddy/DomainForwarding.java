@@ -22,7 +22,8 @@ In the second group, "godaddy.org" redirects visitors to "godaddycares.com".
 
 Note, that domains in each group are sorted lexicographically. The first group goes before the second because "godaddy.com" is lexicographically smaller than "godaddycares.com".
 
-
+Test:
+***************************************************************
 redirects: [["godaddy.net","godaddy.com"], 
  ["godaddy.org","godaddycares.com"], 
  ["godady.com","godaddy.com"], 
@@ -33,7 +34,7 @@ Expected Output:
 [["godaddy.com","godaddy.ne","godaddy.net","godady.com"], 
  ["godaddy.org","godaddycares.com"]]
  
- 
+ ******************************************
  Input:
 redirects: [["a-b.c","a.c"], 
  ["aa-b.c","a-b.c"], 
@@ -47,14 +48,14 @@ Expected Output:
 [["a-b.c","a.c","aa-b.c","bb-b.c","cc-b.c","d-cc-b.c","e-cc-b.c"]]
 
 
-
+****************************************************************
 redirects: [["a","b"]]
 Output:
 Empty
 Expected Output:
 [["a","b"]]
 
-
+************************************** 4
 redirects: [["c","d"], 
  ["f","b"]]
 Output:
@@ -62,7 +63,7 @@ Empty
 Expected Output:
 [["b","f"], 
  ["c","d"]]
- 
+ ***************************************** 5
  Input:
 redirects: [["a","z"], 
  ["c","b"]]
@@ -72,7 +73,7 @@ Expected Output:
 [["b","c"], 
  ["a","z"]]
  
- 
+ *************************************
  * **/
 
 package JavaCodeFightBot.godaddy;
@@ -81,20 +82,67 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeSet;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.JUnitCore;
+
 public class DomainForwarding {
+	private static String[][] Input01 = { { "godaddy.net", "godaddy.com" }, { "godaddy.org", "godaddycares.com" },
+			{ "godady.com", "godaddy.com" }, { "godaddy.ne", "godaddy.net" } };
+
+	private static String[][] ExpectOut01 = {{"godaddy.com","godaddy.ne","godaddy.net","godady.com"}, 
+	                                         {"godaddy.org","godaddycares.com"}};
+
+	private static String[][] Input02 = { { "a-b.c", "a.c" }, { "aa-b.c", "a-b.c" }, { "bb-b.c", "a-b.c" },
+			{ "cc-b.c", "a-b.c" }, { "d-cc-b.c", "bb-b.c" }, { "e-cc-b.c", "bb-b.c" } };
+	private static String[][] ExpectOut02 = {
+			{ "a-b.c", "a.c", "aa-b.c", "bb-b.c", "cc-b.c", "d-cc-b.c", "e-cc-b.c" } }, Input03 = { { "a", "b" } };
+	private static String[][] ExpectOut03 = { { "a", "b" } };
+	private static String[][] Input04 = { { "c", "d" }, { "f", "b" } }, ExpectOut04 = { { "b", "f" }, { "c", "d" } };
+	private static String[][] Input05 = { { "a", "z" }, { "c", "b" } };
+	private static String[][] ExpectOut05 = { { "b", "c" }, { "a", "z" } };
+
 	public static void main(String... args) {
 
-		String[][] output = domainForwarding(
-				new String[][] { { "godaddy.net", "godaddy.com" }, { "godaddy.org", "godaddycares.com" },
-						{ "godady.com", "godaddy.com" }, { "godaddy.ne", "godaddy.net" } });
+			// Using JUnit test
+		org.junit.runner.Result result = JUnitCore.runClasses(DomainForwarding.class);
+		System.out.println(" Test Time Count in miliseconds = " + result.getRunTime());
+		System.out.println(" Test Run Count =  " + result.getRunCount());
+		System.out.println(" Test Failure Count =  " + result.getFailures());
 
-		for (int i = 0; i < output.length; ++i) {
-			for (int j = 0; j < output[i].length; ++j) {
-				System.out.print(" " + output[i][j] + "  ");
-			}
-			System.out.println();
-		}
 	}
+
+//	@Test
+//	public void Test() {
+//		Assert.assertArrayEquals(new String[]{"x","a","b"}, new String[] {"df","df","fd"});
+//	}
+
+	@Test
+	public void Test1() {
+		Assert.assertArrayEquals(ExpectOut01, domainForwarding(Input01));
+	}
+
+
+	@Test
+	public void Test2() {
+		Assert.assertArrayEquals(ExpectOut02, domainForwarding(Input02));
+	}
+	
+	@Test
+	public void Test3() {
+		Assert.assertArrayEquals(ExpectOut03, domainForwarding(Input03));
+	}
+
+	@Test
+	public void Test4() {
+		Assert.assertArrayEquals(ExpectOut04, domainForwarding(Input04));
+	}
+
+	@Test
+	public void Test5() {
+		Assert.assertArrayEquals(ExpectOut05, domainForwarding(Input05));
+	}
+
 
 	static String[][] domainForwarding(String[][] redirects) {
 
