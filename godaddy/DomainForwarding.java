@@ -89,22 +89,26 @@ import org.junit.runner.JUnitCore;
 public class DomainForwarding {
 	private static String[][] Input01 = { { "godaddy.net", "godaddy.com" }, { "godaddy.org", "godaddycares.com" },
 			{ "godady.com", "godaddy.com" }, { "godaddy.ne", "godaddy.net" } };
-
-	private static String[][] ExpectOut01 = {{"godaddy.com","godaddy.ne","godaddy.net","godady.com"}, 
-	                                         {"godaddy.org","godaddycares.com"}};
+	private static String[][] ExpectOut01 = { { "godaddy.com", "godaddy.ne", "godaddy.net", "godady.com" },
+			{ "godaddy.org", "godaddycares.com" } };
 
 	private static String[][] Input02 = { { "a-b.c", "a.c" }, { "aa-b.c", "a-b.c" }, { "bb-b.c", "a-b.c" },
 			{ "cc-b.c", "a-b.c" }, { "d-cc-b.c", "bb-b.c" }, { "e-cc-b.c", "bb-b.c" } };
 	private static String[][] ExpectOut02 = {
-			{ "a-b.c", "a.c", "aa-b.c", "bb-b.c", "cc-b.c", "d-cc-b.c", "e-cc-b.c" } }, Input03 = { { "a", "b" } };
+			{ "a-b.c", "a.c", "aa-b.c", "bb-b.c", "cc-b.c", "d-cc-b.c", "e-cc-b.c" } };
+
+	private static String[][] Input03 = { { "a", "b" } };
 	private static String[][] ExpectOut03 = { { "a", "b" } };
-	private static String[][] Input04 = { { "c", "d" }, { "f", "b" } }, ExpectOut04 = { { "b", "f" }, { "c", "d" } };
+
+	private static String[][] Input04 = { { "c", "d" }, { "f", "b" } };
+	private static String[][] ExpectOut04 = { { "b", "f" }, { "c", "d" } };
+
 	private static String[][] Input05 = { { "a", "z" }, { "c", "b" } };
 	private static String[][] ExpectOut05 = { { "b", "c" }, { "a", "z" } };
 
 	public static void main(String... args) {
 
-			// Using JUnit test
+		// Using JUnit test
 		org.junit.runner.Result result = JUnitCore.runClasses(DomainForwarding.class);
 		System.out.println(" Test Time Count in miliseconds = " + result.getRunTime());
 		System.out.println(" Test Run Count =  " + result.getRunCount());
@@ -112,22 +116,22 @@ public class DomainForwarding {
 
 	}
 
-//	@Test
-//	public void Test() {
-//		Assert.assertArrayEquals(new String[]{"x","a","b"}, new String[] {"df","df","fd"});
-//	}
+	// @Test
+	// public void Test() {
+	// Assert.assertArrayEquals(new String[]{"x","a","b"}, new String[]
+	// {"df","df","fd"});
+	// }
 
 	@Test
 	public void Test1() {
 		Assert.assertArrayEquals(ExpectOut01, domainForwarding(Input01));
 	}
 
-
 	@Test
 	public void Test2() {
 		Assert.assertArrayEquals(ExpectOut02, domainForwarding(Input02));
 	}
-	
+
 	@Test
 	public void Test3() {
 		Assert.assertArrayEquals(ExpectOut03, domainForwarding(Input03));
@@ -142,7 +146,6 @@ public class DomainForwarding {
 	public void Test5() {
 		Assert.assertArrayEquals(ExpectOut05, domainForwarding(Input05));
 	}
-
 
 	static String[][] domainForwarding(String[][] redirects) {
 
