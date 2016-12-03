@@ -1,120 +1,3 @@
-package JavaCodeFightBot.godaddy;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.TreeSet;
-
-public class Typosquatting {
-
-	public static void main(String[] args) {
-
-		System.out.println("Test 1 " + typosquatting(7, "godaddy.com"));
-		System.out.println("Test 2 " + typosquatting(9, "omg.tv"));
-		System.out.println("Test 3 " + typosquatting(8, "godaddy.com"));
-		System.out.println("Test 4 " + typosquatting(1, "godaddy.com"));
-		System.out.println("Test 5 " + typosquatting(0, "godaddy.com"));
-		System.out.println("Test 6 " + typosquatting(0, "aaa.aaa"));
-		System.out.println("Test 7 " + typosquatting(10, "aaa.aaa"));
-		System.out.println("Test 8 " + typosquatting(86, "godaddy.godaddy.com"));
-		System.out.println("Test 9 " + typosquatting(0, "a.a"));
-		System.out.println("Test 10 " + typosquatting(0, "a.ab"));
-		System.out.println("Test 11 " + typosquatting(1, "a.ab"));
-		System.out.println("Test 12 " + typosquatting(0, "ab.a"));
-
-	}
-
-	static int typosquatting(int n, String domain) {
-		
-		final char dot = '.';
-		TreeSet<String> domainTree = new TreeSet();
-		LinkedList<String> lastLevelDomainList = new LinkedList();
-
-		int level = 0;
-		domainTree.add(domain);
-		lastLevelDomainList.add(domain);
-		int currentSize = 0;
-		while (domainTree.size() <= n + 1) {
-			currentSize = domainTree.size();
-			Iterator<String> iterDomain = lastLevelDomainList.iterator();
-			LinkedList<String> tempDomainList = new LinkedList();
-			while (domainTree.size() <= n + 1 && iterDomain.hasNext()) {
-				String e = iterDomain.next();
-				for (int index = 0; index < e.length() - 1; ++index) {
-					char a = e.charAt(index);
-					char b = e.charAt(index + 1);
-					if (a != dot && b != dot && a != b) {
-						String newDomain = e.substring(0, index) + b + a + e.substring(index + 2, e.length());
-						if (domainTree.add(newDomain)) {
-							tempDomainList.add(newDomain);
-						}
-					}
-					if (domainTree.size() > n + 1) {
-						break;
-					}
-				}
-			}
-
-			lastLevelDomainList = tempDomainList;
-			++level;
-			if (currentSize == domainTree.size()) {
-				break;
-			}
-		}
-
-		if (currentSize == domainTree.size()) {
-			return -1;
-		} else
-			return level -1 ;
-	}
-
-}
-
-
-
-/*
- * Input: n: 7 domain: "godaddy.com" Output: Empty Expected Output: 1
- * 
- * 
- * n: 9 domain: "omg.tv" Output: Empty Expected Output: 2 Console Output: Empty
- * 
- * 
- * 
- * n: 8 domain: "godaddy.com" Output: Empty Expected Output: 1
- * 
- * 
- * Input: n: 1 domain: "godaddy.com" Output: Empty Expected Output: 0 Console
- * Output: Empty
- * 
- * 
- * 
- * Input: n: 0 domain: "godaddy.com" Output: Empty Expected Output: 0 Console
- * Output: Empty
- * 
- * 
- * n: 0 domain: "aaa.aaa" Output: Empty Expected Output: -1 Console Output:
- * Empty
- * 
- * Input: n: 10 domain: "aaa.aaa" Output: Empty Expected Output: -1 Console
- * Output: Empty
- * 
- * 
- * 
- * Input: n: 85 domain: "godaddy.godaddy.com" Output: Empty Expected Output: 2
- * Console Output: Empty
- * 
- * Input: n: 0 domain: "a.a" Output: Empty Expected Output: -1 Console Output:
- * Empty
- * 
- * Input: n: 0 domain: "a.ab" Output: Empty Expected Output: 0 Console Output:
- * Empty
- * 
- * Input: n: 1 domain: "a.ab" Output: Empty Expected Output: -1 Console Output:
- * Empty
- * 
- * Input: n: 0 domain: "ab.a" Output: Empty Expected Output: 0 Console Output:
- * Empty
- * 
- */
 
 /*
  * Typosquatting is a hack that relies on mistakes made by Internet users when
@@ -165,5 +48,173 @@ public class Typosquatting {
  * 
  * Note that equal domain strings that may be obtained differently are
  * considered the same.
+ * 
+ */
+package JavaCodeFightBot.godaddy;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.TreeSet;
+
+import org.junit.Test;
+import org.junit.runner.JUnitCore;
+
+import org.junit.Assert;
+
+public class Typosquatting {
+
+	public static void main(String[] args) {
+
+		org.junit.runner.Result result = JUnitCore.runClasses(Typosquatting.class);
+		System.out.println(" Total Test time in milisecond = " + result.getRunTime());
+		System.out.println(" Total Test Count = " + result.getRunCount());
+		System.out.println(" Total Failure Count = " + result.getFailureCount());
+		System.out.println(" Failure:  " + result.getFailures());
+
+	}
+
+	static int typosquatting(int n, String domain) {
+
+		final char dot = '.';
+		TreeSet<String> domainTree = new TreeSet();
+		LinkedList<String> lastLevelDomainList = new LinkedList();
+
+		int level = 0;
+		domainTree.add(domain);
+		lastLevelDomainList.add(domain);
+		int currentSize = 0;
+		while (domainTree.size() <= n + 1) {
+			currentSize = domainTree.size();
+			Iterator<String> iterDomain = lastLevelDomainList.iterator();
+			LinkedList<String> tempDomainList = new LinkedList();
+			while (domainTree.size() <= n + 1 && iterDomain.hasNext()) {
+				String e = iterDomain.next();
+				for (int index = 0; index < e.length() - 1; ++index) {
+					char a = e.charAt(index);
+					char b = e.charAt(index + 1);
+					if (a != dot && b != dot && a != b) {
+						String newDomain = e.substring(0, index) + b + a + e.substring(index + 2, e.length());
+						if (domainTree.add(newDomain)) {
+							tempDomainList.add(newDomain);
+						}
+					}
+					if (domainTree.size() > n + 1) {
+						break;
+					}
+				}
+			}
+
+			lastLevelDomainList = tempDomainList;
+			++level;
+			if (currentSize == domainTree.size()) {
+				break;
+			}
+		}
+
+		if (currentSize == domainTree.size()) {
+			return -1;
+		} else
+			return level - 1;
+	}
+
+	@Test
+	public void Test1() {
+		Assert.assertEquals(1, typosquatting(7, "godaddy.com"));
+	}
+
+	@Test
+	public void Test2() {
+		Assert.assertEquals(2, typosquatting(9, "omg.tv"));
+	}
+
+	@Test
+	public void Test3() {
+		Assert.assertEquals(1, typosquatting(8, "godaddy.com"));
+	}
+
+	@Test
+	public void Test4() {
+		Assert.assertEquals(0, typosquatting(1, "godaddy.com"));
+	}
+
+	@Test
+	public void Test5() {
+		Assert.assertEquals(0, typosquatting(0, "godaddy.com"));
+	}
+
+	@Test
+	public void Test6() {
+		Assert.assertEquals(-1, typosquatting(0, "aaa.aaa"));
+	}
+
+	@Test
+	public void Test7() {
+		Assert.assertEquals(-1, typosquatting(10, "aaa.aaa"));
+	}
+
+	@Test
+	public void Test8() {
+		Assert.assertEquals(2, typosquatting(86, "godaddy.godaddy.com"));
+	}
+
+	@Test
+	public void Test9() {
+		Assert.assertEquals(-1, typosquatting(0, "a.a"));
+	}
+
+	@Test
+	public void Test10() {
+		Assert.assertEquals(0, typosquatting(0, "a.ab"));
+	}
+
+	@Test
+	public void Test11() {
+		Assert.assertEquals(-1, typosquatting(1, "a.ab"));
+	}
+
+	@Test
+	public void Test12() {
+		Assert.assertEquals(0, typosquatting(0, "ab.a"));
+	}
+
+}
+
+/*
+ * Test 1 Input: n: 7 domain: "godaddy.com" Output: Empty Expected Output: 1
+ * 
+ * Test 2 n: 9 domain: "omg.tv" Output: Empty Expected Output: 2 Console Output:
+ * Empty
+ * 
+ * 
+ * Tes 3 n: 8 domain: "godaddy.com" Output: Empty Expected Output: 1
+ * 
+ * Test 4 Input: n: 1 domain: "godaddy.com" Output: Empty Expected Output: 0
+ * Console Output: Empty
+ * 
+ * 
+ * Test 5 Input: n: 0 domain: "godaddy.com" Output: Empty Expected Output: 0
+ * Console Output: Empty
+ * 
+ * Test 6 n: 0 domain: "aaa.aaa" Output: Empty Expected Output: -1 Console
+ * Output: Empty
+ * 
+ * Test 7 Input: n: 10 domain: "aaa.aaa" Output: Empty Expected Output: -1
+ * Console Output: Empty
+ * 
+ * 
+ * Test 8 Input: n: 85 domain: "godaddy.godaddy.com" Output: Empty Expected
+ * Output: 2 Console Output: Empty
+ * 
+ * Test 9 Input: n: 0 domain: "a.a" Output: Empty Expected Output: -1 Console
+ * Output: Empty
+ * 
+ * Input: n: 0 domain: "a.ab" Output: Empty Expected Output: 0 Console Output:
+ * Empty
+ * 
+ * Input: n: 1 domain: "a.ab" Output: Empty Expected Output: -1 Console Output:
+ * Empty
+ * 
+ * Input: n: 0 domain: "ab.a" Output: Empty Expected Output: 0 Console Output:
+ * Empty
  * 
  */
